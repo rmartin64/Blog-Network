@@ -1,4 +1,4 @@
-2019-09-04 14:39:58,051 ERROR: Exception on /1 [GET] [in c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py:1891]
+2019-09-04 14:41:03,358 ERROR: Exception on /1 [GET] [in c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -45,8 +45,9 @@ Traceback (most recent call last):
   File "C:\Users\Dreamcast\Documents\blog\main\templates\index.html", line 10, in block "blog_content"
     {% for post in posts %}
 TypeError: 'Post' object is not iterable
-2019-09-04 14:40:40,744 INFO: Blog Network startup [in C:\Users\Dreamcast\Documents\blog\main\__init__.py:33]
-2019-09-04 14:40:42,437 ERROR: Exception on /1 [GET] [in c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py:1891]
+2019-09-04 16:29:19,993 INFO: Blog Network startup [in C:\Users\Dreamcast\Documents\blog\main\__init__.py:33]
+2019-09-04 16:32:05,404 INFO: Blog Network startup [in C:\Users\Dreamcast\Documents\blog\main\__init__.py:33]
+2019-09-04 16:32:08,860 ERROR: Exception on /index [GET] [in c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py:1891]
 Traceback (most recent call last):
   File "c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -62,8 +63,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "C:\Users\Dreamcast\Documents\blog\main\urls.py", line 150, in post
-    return render_template('index.html', posts=post)
+  File "C:\Users\Dreamcast\Documents\blog\main\urls.py", line 35, in index
+    prev_url=prev_url)
   File "c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\templating.py", line 140, in render_template
     ctx.app,
   File "c:\users\dreamcast\documents\blog\venv\lib\site-packages\flask\templating.py", line 120, in _render
@@ -90,7 +91,9 @@ Traceback (most recent call last):
     {% block content -%}
   File "C:\Users\Dreamcast\Documents\blog\main\templates\base.html", line 47, in block "content"
     {% block blog_content %}{% endblock %}
-  File "C:\Users\Dreamcast\Documents\blog\main\templates\index.html", line 10, in block "blog_content"
-    {% for post in posts %}
-TypeError: 'Post' object is not iterable
-2019-09-04 14:40:58,001 INFO: Blog Network startup [in C:\Users\Dreamcast\Documents\blog\main\__init__.py:33]
+  File "C:\Users\Dreamcast\Documents\blog\main\templates\index.html", line 11, in block "blog_content"
+    {% include 'post.html' %}
+  File "C:\Users\Dreamcast\Documents\blog\main\templates\post.html", line 10, in top-level template code
+    <a href="{{ url_for(id=post.id) }}">
+TypeError: url_for() missing 1 required positional argument: 'endpoint'
+2019-09-04 16:34:19,186 INFO: Blog Network startup [in C:\Users\Dreamcast\Documents\blog\main\__init__.py:33]

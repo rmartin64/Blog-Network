@@ -20,7 +20,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
-    about_me = db.Column(db.String(500))
+    about_me = db.Column(db.Text())
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     followed = db.relationship(
         'User', secondary=followers,
@@ -64,8 +64,8 @@ class User(UserMixin, db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(20000))
-    title = db.Column(db.String(280))
+    body = db.Column(db.Text())
+    title = db.Column(db.Text())
     comments = db.relationship('Comment', backref='source', lazy='dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -75,7 +75,7 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(10000))
+    body = db.Column(db.Text())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     in_response_to = db.Column(db.Integer, db.ForeignKey('post.id'))
