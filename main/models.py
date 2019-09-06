@@ -79,6 +79,7 @@ class Comment(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     in_response_to = db.Column(db.Integer, db.ForeignKey('post.id'))
+    dummy = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Comment {}>'.format(self.body)
