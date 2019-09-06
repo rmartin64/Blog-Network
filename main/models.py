@@ -15,12 +15,12 @@ def load_user(id):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text(40000), index=True, unique=True)
-    email = db.Column(db.Text(40000), index=True, unique=True)
-    password_hash = db.Column(db.Text(40000))
+    username = db.Column(db.Text(), index=True, unique=True)
+    email = db.Column(db.Text(), index=True, unique=True)
+    password_hash = db.Column(db.Text())
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
-    about_me = db.Column(db.Text(40000))
+    about_me = db.Column(db.Text())
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     followed = db.relationship(
         'User', secondary=followers,
@@ -64,8 +64,8 @@ class User(UserMixin, db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text(40000))
-    title = db.Column(db.Text(20000))
+    body = db.Column(db.Text())
+    title = db.Column(db.Text())
     comments = db.relationship('Comment', backref='source', lazy='dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -75,7 +75,7 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text(40000))
+    body = db.Column(db.Text())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     in_response_to = db.Column(db.Integer, db.ForeignKey('post.id'))
